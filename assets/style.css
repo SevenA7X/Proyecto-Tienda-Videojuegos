@@ -1,0 +1,5 @@
+/* Su archivo CSS queda limitado únicamente a configuraciones tipográficas globales */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
