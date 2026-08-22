@@ -1,5 +1,10 @@
 /* Su archivo CSS queda limitado únicamente a configuraciones tipográficas globales */
 body {
+    background-color: #044BD9;
     font-family: Arial, sans-serif;
     line-height: 1.6;
+}
+
+.navbar-custom-color {
+    background-color: #5F3392;
 }
