@@ -1,10 +1,68 @@
 /* Su archivo CSS queda limitado únicamente a configuraciones tipográficas globales */
 body {
-    background-color: #044BD9;
+    background-color: #ffffff;
     font-family: Arial, sans-serif;
     line-height: 1.6;
 }
 
 .navbar-custom-color {
-    background-color: #5F3392;
+    background-color: #292935;
+    font-size: 1.5rem;
 }
+
+.hero-banner {
+      background-color: #3F3D50;
+      color: #ffffff;
+      text-align: center;
+      padding: 35px 20px;
+    }
+
+    .hero-banner h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .hero-banner p {
+      color: #e0e0e0;
+      font-size: 1rem;
+    }
+
+.main-content {
+      background-color: #ffffff;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .main-content h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 20px;
+    }
+
+    .image-container {
+      width: 100%;
+      max-width: 650px;
+      margin: 0 auto 20px auto;
+      overflow: hidden;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #111111;
+      max-width: 700px;
+      margin: 0 auto;
+    }
