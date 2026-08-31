@@ -20,6 +20,9 @@ function cargarNavbar(){
                         <li class="nav-item">
                             <a class="nav-link" href="contacto.html">Contacto</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Login</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -50,7 +53,7 @@ function cargarFooter(){
     if (!footer) return;
 
     footer.innerHTML = `
-        <footer class="bg-dark text-white py-4">
+        <footer class="bg-dark text-white py-4 mt-auto">
 
             <div class="container">
 

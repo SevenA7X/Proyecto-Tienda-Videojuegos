@@ -30,6 +30,10 @@ body {
       font-size: 1rem;
     }
 
+    .footer-custom-color {
+      color: #292935;
+    }
+    
 .main-content {
       background-color: #ffffff;
       max-width: 900px;
