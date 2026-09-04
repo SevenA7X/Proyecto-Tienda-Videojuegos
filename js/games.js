@@ -34,6 +34,24 @@ const juegos = [
     imagen: "https://xboxweb.cz/wp-content/uploads/minecraft.jpg",
     stock: 15,
     precio: 19990
+},
+{
+    id: 5,
+    consola: "PlayStation 5",
+    nombre: "Spider-Man: Miles Morales",
+    descripcion: "Spider-Man: Miles Morales es un juego de acción y aventura que sigue las aventuras del joven superhéroe Miles Morales mientras lucha contra el crimen en la ciudad de Nueva York. Con habilidades únicas, un mundo abierto para explorar y una historia emocionante, este juego ofrece una experiencia envolvente para los fanáticos de Spider-Man.",
+    imagen: "https://tse4.mm.bing.net/th/id/OIP.Cnr6e6y7ZCKcz2OxvrKHQAHaJm?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+    stock: 8,
+    precio: 49990
+},
+{
+    id: 6,
+    consola: "XBOX ONE",
+    nombre: "Forza Horizon 5",
+    descripcion: "Forza Horizon 5 es un juego de carreras de mundo abierto que te permite explorar un vasto y hermoso entorno mientras compites en emocionantes carreras. Con una amplia variedad de vehículos, eventos y desafíos, este juego ofrece una experiencia de conducción realista y emocionante para los amantes de la velocidad.",
+    imagen: "https://tse2.mm.bing.net/th/id/OIP.GkaHXT7SxxnHswn2DZWx5wHaJb?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+    stock: 12,
+    precio: 69990
 }
 ]
 
@@ -44,7 +62,7 @@ function renderProductos(lista) {
   contenedor.innerHTML = ""; 
   
   lista.forEach(juego => { 
-    let colorClase = "secondary"; // Gris por defecto en caso de no coincidir
+    let colorClase = "secondary"; // Gris en caso de no coincidir
         
         if (juego.consola === "Nintendo Switch 2") {
             colorClase = "danger";  // Rojo
@@ -59,7 +77,6 @@ function renderProductos(lista) {
                         <div class="card h-100 shadow-sm">
                             <img src="${juego.imagen}"
                                 class="card-img-top" alt="${juego.nombre}">
-                                <!-- 1. Agregamos d-flex y flex-column al card-body -->
                                 <div class="card-body d-flex flex-column">
                                 <span class="badge bg-${colorClase} mb-2 align-self-start">
                                     ${juego.consola}
@@ -67,7 +84,6 @@ function renderProductos(lista) {
                                 <h5 class="card-title">
                                     ${juego.nombre}
                                 </h5>
-                                <!-- 2. Agregamos flex-grow-1 a la descripción para que ocupe el espacio en blanco -->
                                 <p class="card-text flex-grow-1">
                                     ${juego.descripcion}
                                 </p>
@@ -85,3 +101,25 @@ function renderProductos(lista) {
   cantidad.textContent = `${lista.length} juegos disponibles`;
 } 
 renderProductos(juegos);
+
+const inputBuscador = document.querySelector("#buscadorNombre");
+const selectFiltro = document.querySelector("#filtroConsola");
+
+
+function filtrarJuegos() {
+    const textoBusqueda = inputBuscador.value.toLowerCase();
+    const consolaSeleccionada = selectFiltro.value;
+
+    const juegosFiltrados = juegos.filter(juego => {
+        const coincideNombre = juego.nombre.toLowerCase().includes(textoBusqueda);
+        
+        const coincideConsola = consolaSeleccionada === "Todas" || juego.consola === consolaSeleccionada;
+        
+        return coincideNombre && coincideConsola;
+    });
+
+    renderProductos(juegosFiltrados);
+}
+
+inputBuscador.addEventListener("input", filtrarJuegos);
+selectFiltro.addEventListener("change", filtrarJuegos);
