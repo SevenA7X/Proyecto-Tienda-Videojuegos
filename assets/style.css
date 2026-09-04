@@ -10,6 +10,10 @@ body {
     font-size: 1.5rem;
 }
 
+.color-gris {
+    color: #292935;
+}
+
 .hero-banner {
       background-color: #3F3D50;
       color: #ffffff;

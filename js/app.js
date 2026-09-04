@@ -15,7 +15,7 @@ function cargarNavbar(){
                             <a class="nav-link"  aria-current="page" href="index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="productos.html">Productos</a>
+                            <a class="nav-link" href="games.html">Juegos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contacto.html">Contacto</a>
