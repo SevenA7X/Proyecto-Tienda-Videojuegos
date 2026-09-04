@@ -15,13 +15,16 @@ function cargarNavbar(){
                             <a class="nav-link"  aria-current="page" href="index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="games.html">Juegos</a>
+                            <a class="nav-link" href="games.html">🎮Juegos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contacto.html">Contacto</a>
+                            <a class="nav-link" href="contacto.html">✉️Contacto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">Login</a>
+                            <a class="nav-link" href="carrito.html">🛒Carrito</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">🔒Admin</a>
                         </li>
                     </ul>
                 </div>

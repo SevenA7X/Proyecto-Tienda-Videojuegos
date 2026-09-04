@@ -15,17 +15,21 @@
         <h2 class="text-center mb-4">Iniciar Sesión</h2>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form action="#" method="post">
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="username" name="username" placeholder="Correo Electrónico" required>
-                        <label for="username">Correo Electrónico</label>
-                    </div>
-                    
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
-                        <label for="password">Contraseña</label>
-                    </div>
-                    
+            <form id="formularioContacto" class="needs-validation" novalidate>
+            <div class="mb-3 text-start">
+                <label for="correo" class="form-label fw-bold">Correo electrónico</label>
+                <input type="email" class="form-control" id="correo" placeholder="ejemplo@correo.cl" required>
+                <div class="invalid-feedback">
+                   Por favor, complete este campo con un correo válido.
+                </div>
+            </div>
+                <div class="mb-3 text-start">
+            <label for="password" class="form-label fw-bold">Contraseña</label>
+            <input type="password" class="form-control" id="password" placeholder="Ingresa aqui tu contraseña..." required>
+            <div class="invalid-feedback">
+                Por favor, complete este campo con su contraseña.
+                </div>
+            </div>
                     <button type="submit" class="btn-login w-100">Iniciar Sesión</button>
                 
                     <div class="text-center mt-2">
@@ -45,5 +49,6 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmxc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
     crossorigin="anonymous"></script>
     <script src="js/app.js"></script>  
+    <script src="js/validacion.js"></script>
 </body>
 </html>

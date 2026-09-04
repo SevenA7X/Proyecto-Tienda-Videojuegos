@@ -90,9 +90,9 @@ function renderProductos(lista) {
                                 <p class="fw-bold fs-5">
                                     $${juego.precio.toLocaleString("es-CL")}
                                 </p>
-                                <a href="#" class="btn btn-${colorClase}">
-                                    Ver Juego
-                                </a>
+                                <button type="button" class="btn btn-${colorClase}" data-bs-toggle="modal" data-bs-target="#modalProducto" onclick="prepararModal('${juego.nombre}')">
+                                Ver producto
+                                </button>
                             </div>
                         </div>
                     </div>`; 
@@ -123,3 +123,23 @@ function filtrarJuegos() {
 
 inputBuscador.addEventListener("input", filtrarJuegos);
 selectFiltro.addEventListener("change", filtrarJuegos);
+
+function prepararModal(nombreJuego) {
+    const juegoSeleccionado = juegos.find(juego => juego.nombre === nombreJuego);
+    
+    if (!juegoSeleccionado) return; 
+
+    document.querySelector("#tituloModal").textContent = juegoSeleccionado.nombre;
+    document.querySelector("#cuerpoModal").innerHTML = `
+        <img src="${juegoSeleccionado.imagen}" class="img-fluid rounded mb-3 shadow-sm" alt="${juegoSeleccionado.nombre}" style="max-height: 250px;">
+        <p class="fs-4 fw-bold text-success">$${juegoSeleccionado.precio.toLocaleString("es-CL")}</p>
+        <p class="text-muted">${juegoSeleccionado.consola}</p>
+    `;
+
+    const btnCarrito = document.querySelector("#btnAgregarCarrito");
+    
+    btnCarrito.onclick = () => {
+        alert(`¡Me he encargado de añadir ${juegoSeleccionado.nombre}`);
+
+    };
+}
