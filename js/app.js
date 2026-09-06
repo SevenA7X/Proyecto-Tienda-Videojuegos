@@ -1,5 +1,25 @@
 console.log("JavaScript está funcionando");
+function actualizarContadorCarrito() {
+    const contadorElemento = document.querySelector("#navContadorCarrito");
+    if (!contadorElemento) return;
+
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let totalArticulos = 0;
+
+    carrito.forEach(item => {
+        totalArticulos += item.cantidad;
+    });
+
+    if (totalArticulos > 0) {
+        contadorElemento.textContent = totalArticulos;
+        contadorElemento.style.display = "inline-block";
+    } else {
+        contadorElemento.style.display = "none";
+    }
+}
+
 function cargarNavbar(){
+    const navbar = document.querySelector("#navbar");
     if(!navbar) return;
 
     navbar.innerHTML = `
@@ -12,16 +32,19 @@ function cargarNavbar(){
                 <div class="collapse navbar-collapse" id="menuPrincipal">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link"  aria-current="page" href="index.html">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="games.html">🎮Juegos</a>
+                            <a class="nav-link" href="games.html">Juegos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contacto.html">✉️Contacto</a>
+                            <a class="nav-link" href="contacto.html">Contacto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="carrito.html">🛒Carrito</a>
+                            <a class="nav-link" href="carrito.html">
+                                🛒Carrito 
+                                <span id="navContadorCarrito" class="badge bg-danger rounded-pill" style="display: none; font-size: 0.75em; transform: translateY(-2px);">0</span>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="login.html">🔒Admin</a>
@@ -30,25 +53,23 @@ function cargarNavbar(){
                 </div>
             </div>
         </nav>
-    
-        `;
+    `;
 
     marcarPaginaActual();
+    actualizarContadorCarrito();
 
     function marcarPaginaActual() {
-    const paginaActual = window.location.pathname.split("/").pop() || "index.html";
+        const paginaActual = window.location.pathname.split("/").pop() || "index.html";
+        const enlaces = document.querySelectorAll("#navbar .nav-link");
 
-    const enlaces = document.querySelectorAll("#navbar .nav-link");
-
-    enlaces.forEach(enlace => {
-        const paginaEnlace = enlace.getAttribute("href");
-
-        if (paginaEnlace === paginaActual) {
-            enlace.classList.add("active");
-            enlace.setAttribute("aria-current", "page");
-        }
-    });
-}
+        enlaces.forEach(enlace => {
+            const paginaEnlace = enlace.getAttribute("href");
+            if (paginaEnlace === paginaActual) {
+                enlace.classList.add("active");
+                enlace.setAttribute("aria-current", "page");
+            }
+        });
+    }
 }
 
 function cargarFooter(){
@@ -57,43 +78,26 @@ function cargarFooter(){
 
     footer.innerHTML = `
         <footer class="bg-dark text-white py-4 mt-auto">
-
             <div class="container">
-
                 <div class="row">
-
                     <div class="col-md-6">
                         <h5>Quark Games</h5>
-
-                        <p>
-                            Videojuegos para todos los gamers.
-                        </p>
+                        <p>Videojuegos para todos los gamers.</p>
                     </div>
-
                     <div class="col-md-6 text-md-end">
                         <h5>Contacto</h5>
-
-                        <p class="mb-0">
-                            contactoQuak@mystore.cl
-                        </p>
-
-                        <p>
-                            Viña del Mar, Chile
-                        </p>
+                        <p class="mb-0">contactoQuak@mystore.cl</p>
+                        <p>Viña del Mar, Chile</p>
                     </div>
-
                 </div>
-
                 <hr>
-
                 <p class="text-center mb-0">
                     &copy; 2026 QuarkGames. Todos los derechos reservados.
                 </p>
-
             </div>
-
         </footer>
     `;
 }
+
 cargarNavbar();
 cargarFooter();
