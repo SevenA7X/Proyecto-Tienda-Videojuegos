@@ -1,4 +1,5 @@
-const juegos = [
+// 1. Catálogo base por defecto (Tus 12 juegos originales)
+const juegosPorDefecto = [
 {
     id: 1,
     consola: "Nintendo Switch 2",
@@ -109,11 +110,18 @@ const juegos = [
 }
 ];
 
+let juegos = JSON.parse(localStorage.getItem("catalogoJuegos"));
+
+if (!juegos || juegos.length === 0) {
+    juegos = juegosPorDefecto;
+    localStorage.setItem("catalogoJuegos", JSON.stringify(juegos));
+}
+
 const contenedor = document.querySelector("#contenedorJuegos"); 
 const cantidad = document.querySelector("#cantidadJuegos"); 
 const inputBuscador = document.querySelector("#buscadorNombre");
 const selectFiltro = document.querySelector("#filtroConsola");
-const alertaContenedor = document.querySelector("#alertaContenedor");
+const alertaContenedor = document.querySelector("#alertaContenedor"); // Contenedor de tu notificación verde
 
 function renderProductos(lista) { 
     contenedor.innerHTML = ""; 
@@ -162,6 +170,11 @@ function agregarAlCarrito(idJuego) {
     const juegoBuscado = juegos.find(juego => juego.id === idJuego);
     const existe = carritoActual.find(item => item.id === idJuego);
     
+    if (juegoBuscado.stock <= 0) {
+        alert(`Lo siento mucho, "${juegoBuscado.nombre}" se ha quedado sin stock.`);
+        return;
+    }
+
     if (existe) {
         existe.cantidad++;
     } else {
@@ -170,22 +183,26 @@ function agregarAlCarrito(idJuego) {
     
     localStorage.setItem("carrito", JSON.stringify(carritoActual));
     
-    alertaContenedor.innerHTML = `
-        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
-            ${juegoBuscado.nombre} fue agregado al carrito.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-        </div>
-    `;
+    if (alertaContenedor) {
+        alertaContenedor.innerHTML = `
+            <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+                <strong>${juegoBuscado.nombre}</strong> fue agregado al carrito.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        `;
 
-    setTimeout(() => {
-        const alertaActiva = document.querySelector("#alertaContenedor .alert");
-        if (alertaActiva) {
-            const alertaInstancia = new bootstrap.Alert(alertaActiva);
-            alertaInstancia.close();
-        }
-    }, 3000);
+        setTimeout(() => {
+            const alertaActiva = document.querySelector("#alertaContenedor .alert");
+            if (alertaActiva) {
+                const alertaInstancia = new bootstrap.Alert(alertaActiva);
+                alertaInstancia.close();
+            }
+        }, 3000);
+    }
 
-    actualizarContadorCarrito();
+    if (typeof actualizarContadorCarrito === "function") {
+        actualizarContadorCarrito();
+    }
 }
 
 function filtrarJuegos() {
