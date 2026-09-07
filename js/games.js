@@ -1,4 +1,4 @@
-// 1. Catálogo base por defecto (Tus 12 juegos originales)
+// BASE DE DATOS INICIAL (CATÁLOGO POR DEFECTO)
 const juegosPorDefecto = [
 {
     id: 1,
@@ -110,6 +110,7 @@ const juegosPorDefecto = [
 }
 ];
 
+// SINCRONIZACIÓN CON EL PANEL DE ADMINISTRACIÓN
 let juegos = JSON.parse(localStorage.getItem("catalogoJuegos"));
 
 if (!juegos || juegos.length === 0) {
@@ -117,12 +118,14 @@ if (!juegos || juegos.length === 0) {
     localStorage.setItem("catalogoJuegos", JSON.stringify(juegos));
 }
 
+// CAPTURA DE ELEMENTOS DEL DOM (HTML)
 const contenedor = document.querySelector("#contenedorJuegos"); 
 const cantidad = document.querySelector("#cantidadJuegos"); 
 const inputBuscador = document.querySelector("#buscadorNombre");
 const selectFiltro = document.querySelector("#filtroConsola");
 const alertaContenedor = document.querySelector("#alertaContenedor"); // Contenedor de tu notificación verde
 
+// FUNCIÓN PARA DIBUJAR LOS PRODUCTOS EN PANTALLA
 function renderProductos(lista) { 
     contenedor.innerHTML = ""; 
   
@@ -165,6 +168,7 @@ function renderProductos(lista) {
     cantidad.textContent = `${lista.length} juegos disponibles`;
 } 
 
+// FUNCIÓN PARA AGREGAR JUEGOS AL CARRITO
 function agregarAlCarrito(idJuego) {
     let carritoActual = JSON.parse(localStorage.getItem("carrito")) || [];
     const juegoBuscado = juegos.find(juego => juego.id === idJuego);
@@ -205,6 +209,7 @@ function agregarAlCarrito(idJuego) {
     }
 }
 
+// FUNCIÓN DE FILTRADO Y BÚSQUEDA
 function filtrarJuegos() {
     const textoBusqueda = inputBuscador.value.toLowerCase();
     const consolaSeleccionada = selectFiltro.value;
@@ -219,6 +224,7 @@ function filtrarJuegos() {
     renderProductos(juegosFiltrados);
 }
 
+// ASIGNACIÓN DE EVENTOS Y EJECUCIÓN INICIAL
 inputBuscador.addEventListener("input", filtrarJuegos);
 selectFiltro.addEventListener("change", filtrarJuegos);
 

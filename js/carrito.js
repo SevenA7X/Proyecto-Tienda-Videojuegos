@@ -1,6 +1,7 @@
-// Obtener el carrito almacenado o inicializar un arreglo vacío
+// INICIALIZACIÓN DEL CARRITO
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
+// CAPTURA DE ELEMENTOS DEL DOM (HTML)
 const contenedorCarrito = document.querySelector("#contenedorCarrito");
 const totalCarrito = document.querySelector("#totalCarrito");
 const tituloCarrito = document.querySelector("#tituloCarrito");
@@ -8,6 +9,7 @@ const btnVaciar = document.querySelector("#btnVaciar");
 const btnComprar = document.querySelector("#btnComprar");
 const btnContinuarInferior = document.querySelector("#btnContinuarInferior");
 
+// FUNCIÓN PRINCIPAL DE RENDERIZADO
 function renderCarrito() {
     contenedorCarrito.innerHTML = "";
     let total = 0;
@@ -17,6 +19,7 @@ function renderCarrito() {
         cantidadArticulos += item.cantidad;
     });
 
+    // Actualización dinámica del Título Principal
     if (cantidadArticulos === 0) {
         tituloCarrito.textContent = "Tu carrito de compra";
     } else if (cantidadArticulos === 1) {
@@ -25,6 +28,7 @@ function renderCarrito() {
         tituloCarrito.textContent = `Tu carrito de compra (${cantidadArticulos} artículos)`;
     }
 
+    // Estado: Carrito Vacío
     if (carrito.length === 0) {
         contenedorCarrito.innerHTML = `
             <div class="mensaje-vacio">
@@ -39,6 +43,7 @@ function renderCarrito() {
         return;
     }
 
+    // Estado: Carrito con Productos
     carrito.forEach((item, index) => {
         const subtotal = item.precio * item.cantidad;
         total += subtotal;
@@ -74,6 +79,7 @@ function renderCarrito() {
         `;
     });
 
+    // Actualización de Totales y Estados Finales
     totalCarrito.textContent = `CLP$${total.toLocaleString("es-CL")}`;
     btnComprar.disabled = false;
     btnContinuarInferior.disabled = false;
@@ -83,6 +89,7 @@ function renderCarrito() {
     actualizarContadorCarrito();
 }
 
+// FUNCIONES DE MODIFICACIÓN DE PRODUCTOS
 function cambiarCantidad(index, cambio) {
     if (carrito[index].cantidad + cambio > 0) {
         carrito[index].cantidad += cambio;
@@ -97,6 +104,7 @@ function eliminarProducto(index) {
     renderCarrito();
 }
 
+// EVENTOS Y LÓGICA DE COMPRA
 btnVaciar.addEventListener("click", () => {
     if (confirm("¿Estás seguro de que deseas eliminar todos los artículos?")) {
         carrito = [];

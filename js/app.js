@@ -1,4 +1,4 @@
-console.log("JavaScript está funcionando");
+// ACTUALIZAR CONTADOR DEL CARRITO EN LA NAVBAR
 function actualizarContadorCarrito() {
     const contadorElemento = document.querySelector("#navContadorCarrito");
     if (!contadorElemento) return;
@@ -18,6 +18,7 @@ function actualizarContadorCarrito() {
     }
 }
 
+// INYECTAR LA BARRA DE NAVEGACIÓN (NAVBAR)
 function cargarNavbar(){
     const navbar = document.querySelector("#navbar");
     if(!navbar) return;
@@ -72,6 +73,7 @@ function cargarNavbar(){
     }
 }
 
+// INYECTAR EL PIE DE PÁGINA (FOOTER)
 function cargarFooter(){
     const footer = document.querySelector("#footer");
     if (!footer) return;
@@ -99,5 +101,6 @@ function cargarFooter(){
     `;
 }
 
+// EJECUCIÓN INICIAL AUTOMÁTICA
 cargarNavbar();
 cargarFooter();

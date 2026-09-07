@@ -1,13 +1,16 @@
+// CAPTURA DE ELEMENTOS DEL DOM (HTML)
 const formulario = document.querySelector("#formularioInventario");
 const tabla = document.querySelector("#tablaInventario");
 const alertasContenedor = document.querySelector("#alertasInventario");
 const btnCancelar = document.querySelector("#btnCancelar");
 const tituloFormulario = document.querySelector("#tituloFormulario");
 
+// INICIALIZACIÓN DE DATOS Y VARIABLES GLOBALES
 let inventario = JSON.parse(localStorage.getItem("catalogoJuegos")) || [];
 
 const STOCK_CRITICO = 5;
 
+// FUNCIÓN DE LECTURA 
 function renderizarTabla() {
     tabla.innerHTML = "";
     let alertaStockMostrada = false;
@@ -45,6 +48,7 @@ function renderizarTabla() {
     localStorage.setItem("catalogoJuegos", JSON.stringify(inventario));
 }
 
+// FUNCIÓN DE CREACIÓN Y ACTUALIZACIÓN
 formulario.addEventListener("submit", function(evento) {
     evento.preventDefault();
     formulario.classList.add('was-validated');
@@ -75,6 +79,7 @@ formulario.addEventListener("submit", function(evento) {
     }
 });
 
+// FUNCIÓN PREPARATORIA PARA EDICIÓN
 function prepararEdicion(id) {
     const juego = inventario.find(j => j.id === id);
     if (!juego) return;
@@ -91,6 +96,7 @@ function prepararEdicion(id) {
     btnCancelar.classList.remove("d-none");
 }
 
+// FUNCIÓN DE BORRADO
 function eliminarJuego(id) {
     if (confirm("¿Estás seguro de que deseas borrar este juego de tu catálogo?")) {
         inventario = inventario.filter(j => j.id !== id);
@@ -99,6 +105,7 @@ function eliminarJuego(id) {
     }
 }
 
+// FUNCIÓN DE LIMPIEZA
 function resetearFormulario() {
     formulario.reset();
     formulario.classList.remove('was-validated');
@@ -107,6 +114,7 @@ function resetearFormulario() {
     btnCancelar.classList.add("d-none");
 }
 
+// SISTEMA UNIFICADO DE ALERTAS VISUALES
 function mostrarAlerta(mensaje, tipo) {
     alertasContenedor.innerHTML = `
         <div class="alert alert-${tipo} alert-dismissible fade show shadow-sm" role="alert">
@@ -123,4 +131,5 @@ function mostrarAlerta(mensaje, tipo) {
     }, 4000);
 }
 
+// EJECUCIÓN INICIAL
 renderizarTabla();
